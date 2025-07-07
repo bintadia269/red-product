@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaHotel, FaTachometerAlt } from 'react-icons/fa';
 
+
 const Container = styled.div`
   width: 250px;
   background: #2c2c2c;
@@ -35,7 +36,6 @@ const NavItem = styled.li`
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  user-select: none;
 
   &:hover {
     background: #444;
