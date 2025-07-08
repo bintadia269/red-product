@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link as RouterLink } from 'react-router-dom';
 
 const Container = styled.div`
   background: #fff;
@@ -7,7 +8,7 @@ const Container = styled.div`
   border-radius: 8px;
   width: 350px;
   text-align: center;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 `;
 
 const Title = styled.h2`
@@ -53,20 +54,87 @@ const Link = styled.p`
 `;
 
 function Register() {
+  const [nom, setNom] = useState('');
+  const [email, setEmail] = useState('');
+  const [motDePasse, setMotDePasse] = useState('');
+  const [termsAccepted, setTermsAccepted] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Vérifie si les termes sont acceptés
+    if (!termsAccepted) {
+      alert('Veuillez accepter les termes.');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:8000/api/signUp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: nom,
+          email: email,
+          password: motDePasse,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert('Inscription réussie !');
+        console.log(data);
+        // Rediriger vers la page de connexion ou une autre page
+        window.location.href = '/'; 
+      } else {
+        alert('Erreur : ' + data.message || 'Une erreur est survenue');
+      }
+    } catch (error) {
+      console.error('Erreur réseau :', error);
+      alert('Erreur réseau : ' + error.message);
+    }
+  };
+
   return (
     <Container>
       <Title>Inscrivez-vous en tant que Admin</Title>
-      <Input type="text" placeholder="Nom" />
-      <Input type="email" placeholder="E-mail" />
-      <Input type="password" placeholder="Mot de passe" />
-      <CheckboxContainer>
-        <input type="checkbox" id="terms" />
-        <label htmlFor="terms" style={{ marginLeft: '0.5rem' }}>
-          Accepter les termes et la politique
-        </label>
-      </CheckboxContainer>
-      <Button>S'inscrire</Button>
-      <Link>Vous avez déjà un compte ? <a href="#">Se connecter</a></Link>
+      <form onSubmit={handleSubmit}>
+        <Input
+          type="text"
+          placeholder="Nom"
+          value={nom}
+          onChange={(e) => setNom(e.target.value)}
+        />
+        <Input
+          type="email"
+          placeholder="E-mail"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          type="password"
+          placeholder="Mot de passe"
+          value={motDePasse}
+          onChange={(e) => setMotDePasse(e.target.value)}
+        />
+
+        <CheckboxContainer>
+          <input
+            type="checkbox"
+            id="terms"
+            checked={termsAccepted}
+            onChange={(e) => setTermsAccepted(e.target.checked)}
+          />
+          <label htmlFor="terms" style={{ marginLeft: '0.5rem' }}>
+            Accepter les termes et la politique
+          </label>
+        </CheckboxContainer>
+        <Button type="submit">S'inscrire</Button>
+      </form>
+      <Link>
+        Vous avez déjà un compte ? <a href="#">Se connecter</a>
+      </Link>
     </Container>
   );
 }

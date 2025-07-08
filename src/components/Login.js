@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -53,18 +54,69 @@ const Link = styled.p`
 `;
 
 function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('http://localhost:8000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Connexion réussie !");
+        localStorage.setItem("token", data.token); 
+        navigate("/dashboard"); 
+      } else {
+        alert(data.message || "Email ou mot de passe incorrect");
+      }
+    } catch (error) {
+      console.error("Erreur réseau :", error);
+      alert("Erreur de connexion au serveur");
+    }
+  };
+
   return (
     <Container>
       <Title>Connectez-vous en tant que Admin</Title>
-      <Input type="email" placeholder="E-mail" />
-      <Input type="password" placeholder="Mot de passe" />
-      <CheckboxContainer>
-        <input type="checkbox" id="remember" />
-        <label htmlFor="remember" style={{ marginLeft: '0.5rem' }}>Gardez-moi connecté</label>
-      </CheckboxContainer>
-      <Button>Se connecter</Button>
-      <Link><a href="#">Mot de passe oublié?</a></Link>
-      <Link>Vous n'avez pas de compte? <a href="#">S’inscrire</a></Link>
+      <form onSubmit={handleSubmit}>
+        <Input
+          type="email"
+          placeholder="E-mail"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <Input
+          type="password"
+          placeholder="Mot de passe"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <CheckboxContainer>
+          <input
+            type="checkbox"
+            id="remember"
+            checked={rememberMe}
+            onChange={(e) => setRememberMe(e.target.checked)}
+          />
+          <label htmlFor="remember" style={{ marginLeft: '0.5rem' }}>
+            Gardez-moi connecté
+          </label>
+        </CheckboxContainer>
+        <Button type="submit">Se connecter</Button>
+      </form>
+      <Link><a href="#">Mot de passe oublié ?</a></Link>
+      <Link>Vous n'avez pas de compte ? <a href="/register">S’inscrire</a></Link>
     </Container>
   );
 }

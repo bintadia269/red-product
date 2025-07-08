@@ -1,85 +1,128 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FaHotel, FaTachometerAlt } from 'react-icons/fa';
-
+import { FaHotel, FaUserCircle } from 'react-icons/fa';
+import { MdDashboard } from 'react-icons/md';
+import { BsListUl } from 'react-icons/bs';
+import { NavLink } from 'react-router-dom';
 
 const Container = styled.div`
-  width: 250px;
-  background: #2c2c2c;
-  color: white;
+  display: flex;
+  min-height: 100vh;
+  background: #f7f7f7;
+`;
+
+const MySidebar = styled.aside`
+  width: 240px;
+  background: #232428;
+  color: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  padding-top: 1.5rem;
 `;
 
-const Top = styled.div`
-  padding: 1.5rem;
+const SidebarHeader = styled.div`
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 2.5rem;
+  padding-left: 2rem;
 `;
 
-const Logo = styled.h1`
-  font-size: 1.3rem;
-  font-weight: bold;
-`;
-
-const Nav = styled.ul`
+const SidebarMenu = styled.ul`
   list-style: none;
   padding: 0;
-  margin-top: 2rem;
+  margin: 0;
 `;
 
-const NavItem = styled.li`
-  padding: 1rem;
-  background: ${(props) => (props.active ? '#444' : 'transparent')};
-  margin-bottom: 0.5rem;
-  border-left: 5px solid ${(props) => (props.active ? '#fff' : 'transparent')};
+const Principale = styled.h1`
+  font-size: 1.25rem;
+  font-weight: 100;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+`;
+
+const SidebarMenuItem = styled(NavLink)`
+  padding: 0.9rem 2rem;
+  background: transparent;
+  color: #bdbdbd;
+  border-left: 4px solid transparent;
+  font-weight: 400;
   display: flex;
   align-items: center;
-  gap: 10px;
-  cursor: pointer;
+  gap: 0.7rem;
+  text-decoration: none;
 
-  &:hover {
-    background: #444;
+  &.active {
+    background: #36393d;
+    color: #fff;
+    border-left: 4px solid #ffd600;
+    font-weight: 600;
   }
 `;
 
-const Bottom = styled.div`
-  padding: 1.5rem;
-  border-top: 1px solid #444;
+const SidebarFooter = styled.div`
+  margin-top: auto;
+  padding: 2rem 2rem 1.3rem 2rem;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.9rem;
+  background: #2d2f34;
+  border-radius: 0 0 8px 8px;
 `;
 
-const Avatar = styled.img`
+const Avatar = styled.div`
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a084e8;
+  font-size: 1.4rem;
+  font-weight: bold;
+`;
+
+const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const UserName = styled.div`
+  font-weight: 500;
+  font-size: 1rem;
+`;
+
+const UserStatus = styled.div`
+  font-size: 0.85rem;
+  color: #7bffb2;
 `;
 
 const Sidebar = () => {
   return (
     <Container>
-      <Top>
-        <Logo>RED PRODUCT</Logo>
-        <Nav>
-          <NavItem active>
-            <FaTachometerAlt />
-            Dashboard
-          </NavItem>
-          <NavItem>
-            <FaHotel />
-            Liste des hôtels
-          </NavItem>
-        </Nav>
-      </Top>
-      <Bottom>
-        <Avatar src="/avatar.jpg" alt="profil" />
-        <div>
-          <div>Mouhamet Badiane</div>
-          <span style={{ color: '#00c897', fontSize: '0.8rem' }}>● en ligne</span>
-        </div>
-      </Bottom>
+      <MySidebar>
+        <SidebarHeader>RED PRODUCT</SidebarHeader>
+        <SidebarMenu>
+          <Principale>Principal</Principale>
+          <SidebarMenuItem to="/dashboard">
+            <FaHotel /> Dashboard
+          </SidebarMenuItem>
+          <SidebarMenuItem to="/hotels">
+            <BsListUl /> Liste des hôtels
+          </SidebarMenuItem>
+        </SidebarMenu>
+        <SidebarFooter>
+          <Avatar>
+            <FaUserCircle />
+          </Avatar>
+          <UserInfo>
+            <UserName>Binta Dia</UserName>
+            <UserStatus>En ligne</UserStatus>
+          </UserInfo>
+        </SidebarFooter>
+      </MySidebar>
     </Container>
   );
 };
