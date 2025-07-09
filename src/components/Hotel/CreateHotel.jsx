@@ -12,7 +12,7 @@ const Container = styled.div`
 const Title = styled.h2`
   font-size: 1.6rem;
   font-weight: 600;
-  color: #232323;
+  color: #fff;
   margin-bottom: 2rem;
 `;
 
@@ -42,13 +42,13 @@ const Input = styled.input`
   transition: border-color 0.2s;
 
   &:focus {
-    border-color: #a084e8;
+    border-color: #e3c029;
     outline: none;
   }
 `;
 
 const SubmitButton = styled.button`
-  background-color: #a084e8;
+  background-color:#e3c029;
   color: white;
   font-size: 1rem;
   padding: 0.8rem 1.2rem;
@@ -59,7 +59,7 @@ const SubmitButton = styled.button`
   transition: background 0.2s;
 
   &:hover {
-    background-color: #8b6df0;
+    background-color:rgb(173, 166, 25);
   }
 `;
 
@@ -80,7 +80,6 @@ const SubmitButton = styled.button`
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Nouvel hôtel créé :", hotel);
-    // Tu peux remplacer ici par une requête vers une API
     navigate("/hotels");
   };
 
@@ -131,7 +130,7 @@ const SubmitButton = styled.button`
           />
         </FormGroup>
 
-        <SubmitButton type="submit">Créer</SubmitButton>
+        <SubmitButton type="submit">Ajouter</SubmitButton>
       </Form>
     </Container>
   );

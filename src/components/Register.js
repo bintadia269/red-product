@@ -69,7 +69,7 @@ function Register() {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/signUp', {
+      const response = await fetch('https://red-product-backend-zim0.onrender.com/api/signUp/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
