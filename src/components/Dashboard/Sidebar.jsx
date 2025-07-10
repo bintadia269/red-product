@@ -9,6 +9,8 @@ const Container = styled.div`
   display: flex;
   min-height: 100vh;
   background: #f7f7f7;
+
+
 `;
 
 const MySidebar = styled.aside`
@@ -18,6 +20,15 @@ const MySidebar = styled.aside`
   display: flex;
   flex-direction: column;
   padding-top: 1.5rem;
+
+    @media (max-width: 667px) {
+    width: 150px;
+    padding: 1rem;
+    font-size: 0.9rem;
+
+
+  }
+
 `;
 
 const SidebarHeader = styled.div`
@@ -26,7 +37,12 @@ const SidebarHeader = styled.div`
   letter-spacing: 1px;
   margin-bottom: 2.5rem;
   padding-left: 2rem;
+
+  @media (max-width: 667px) {
+    font-size: 18px;
+  }
 `;
+  
 
 const SidebarMenu = styled.ul`
   list-style: none;
@@ -40,6 +56,11 @@ const Principale = styled.h1`
   letter-spacing: 1px;
   margin-bottom: 1rem;
   padding-left: 2rem;
+
+@media (max-width: 667px) {
+    font-size: 18px;
+  }
+
 `;
 
 const SidebarMenuItem = styled(NavLink)`
@@ -58,6 +79,12 @@ const SidebarMenuItem = styled(NavLink)`
     color: #fff;
     border-left: 4px solid #ffd600;
     font-weight: 600;
+  }
+
+  @media (max-width: 667px) {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+
   }
 `;
 
@@ -82,6 +109,12 @@ const Avatar = styled.div`
   color: #a084e8;
   font-size: 1.4rem;
   font-weight: bold;
+
+  @media (max-width: 667px) {
+    width: 30px;  
+    height: 30px;
+    font-size: 1.2rem;
+  } 
 `;
 
 const UserInfo = styled.div`
@@ -95,7 +128,7 @@ const UserName = styled.div`
 `;
 
 const UserStatus = styled.div`
-  font-size: 0.85rem;
+  font-size: 0.60rem;
   color: #7bffb2;
 `;
 

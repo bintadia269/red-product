@@ -9,6 +9,12 @@ const Card = styled.div`
   gap: 1rem;
   align-items: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+   @media (max-width: 667px) {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
 `;
 
 const IconWrapper = styled.div`
@@ -30,11 +36,19 @@ const Info = styled.div`
 const Count = styled.div`
   font-size: 1.3rem;
   font-weight: bold;
+
+   @media (max-width: 667px) {
+    font-size: 1.1rem;
+  }
 `;
 
 const Label = styled.div`
   font-size: 0.9rem;
   color: #777;
+
+   @media (max-width: 667px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const StatCard = ({ icon: Icon, count, label, color }) => {

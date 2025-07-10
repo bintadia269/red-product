@@ -70,11 +70,11 @@ const Container = styled.div`
   overflow: hidden;
 `;
 
-const Main = styled.main`
+const Content = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #f7f7f7;
+  overflow-y: auto;
 `;
 
 const Header = styled.header`
@@ -85,6 +85,14 @@ const Header = styled.header`
   padding: 0 2rem;
   justify-content: space-between;
   border-bottom: 1px solid #ececec;
+
+  @media (max-width: 667px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+    padding: 1rem;
+    height: auto;
+  }
 `;
 
 const Title = styled.h2`
@@ -100,7 +108,11 @@ const SearchBar = styled.input`
   padding: 0.5rem 1.2rem;
   width: 220px;
   font-size: 1rem;
-  margin-right: 1.5rem;
+
+  @media (max-width: 667px) {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
 `;
 
 const AddButton = styled.button`
@@ -118,26 +130,30 @@ const AddButton = styled.button`
   &:hover {
     background: #f7f7f7;
   }
+
+  @media (max-width: 667px) {
+    width: 100%;
+    margin-left: 0;
+  }
 `;
 
-const Content = styled.section`
-  padding: 2rem 2rem 0 2rem;
+const Main = styled.main`
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 667px) {
+    padding: 1rem;
+  }
 `;
 
 const HotelsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.3rem;
 
-  @media (max-width: 1200px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 500px) {
+  @media (max-width: 667px) {
     grid-template-columns: 1fr;
   }
 `;
@@ -178,13 +194,20 @@ const HotelName = styled.div`
 const HotelAddress = styled.div`
   font-size: 0.97rem;
   color: rgb(145, 49, 49);
+
+  @media (max-width: 667px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const HotelPrice = styled.div`
   font-size: 1rem;
   color: rgb(27, 26, 29);
   font-weight: 500;
-  margin-top: 0.2rem;
+
+  @media (max-width: 667px) {
+    font-size: 0.95rem;
+  }
 `;
 
 function Hotels() {
@@ -193,11 +216,10 @@ function Hotels() {
   return (
     <Container>
       <Sidebar />
-
-      <Main>
+      <Content>
         <Header>
           <Title>Liste des hôtels</Title>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
             <SearchBar placeholder="Rechercher..." />
             <AddButton onClick={() => navigate('/hotels/new')}>
               + Créer un nouvel hôtel
@@ -205,19 +227,14 @@ function Hotels() {
           </div>
         </Header>
 
-        <Content>
-          <h3
-            style={{
-              fontWeight: 500,
-              color: '#232323',
-              marginBottom: '1.2rem',
-            }}
-          >
+        <Main>
+          <h3 style={{ fontWeight: 500, color: '#232323', marginBottom: '1.2rem' }}>
             Hôtels{' '}
             <span style={{ color: '#bdbdbd', fontWeight: 400 }}>
               ({hotels.length})
             </span>
           </h3>
+
           <HotelsGrid>
             {hotels.map((hotel, idx) => (
               <HotelCard key={`${hotel.name}-${idx}`}>
@@ -230,8 +247,8 @@ function Hotels() {
               </HotelCard>
             ))}
           </HotelsGrid>
-        </Content>
-      </Main>
+        </Main>
+      </Content>
     </Container>
   );
 }

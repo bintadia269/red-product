@@ -10,12 +10,20 @@ const Container = styled.div`
   align-items: center;
   border-bottom: 1px solid #ddd;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+   
 `;
 
 const LeftContent = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
+
+   @media (max-width: 667px) {
+    text-align: center;
+    margin-bottom: 1rem;
+    
+  }
 `;
 
 const Title = styled.h2`
@@ -23,18 +31,49 @@ const Title = styled.h2`
   font-size: 1.4rem;
   font-weight: 600;
   color: #333;
+
+   @media (max-width: 667px) {
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+
+  }
 `;
 
 const Subtitle = styled.p`
   margin: 0;
   font-size: 0.9rem;
   color: #888;
+
+   @media (max-width: 667px) {
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+
+  }
 `;
 
 const RightContent = styled.div`
   display: flex;
   align-items: center;
   gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    background: #f9f9f9;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  
+    & > * {
+      margin: 0 0.5rem; 
+  }
+
+  @media (max-width: 667px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
 `;
 
 const Search = styled.input`
@@ -48,6 +87,12 @@ const Search = styled.input`
     outline: none;
     border-color: #2563eb;
   }
+
+  
+  @media (max-width: 667px) {
+    width: 100%;
+  }
+  
 `;
 
 const IconButton = styled.button`

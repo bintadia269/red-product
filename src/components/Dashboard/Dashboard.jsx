@@ -5,12 +5,16 @@ import Header from './Header';
 import StatCard from './StatCard';
 import { FaFileAlt, FaComment, FaUsers, FaEnvelope, FaHotel,FaBuilding,} from 'react-icons/fa';
 
+
 const Container = styled.div`
   display: flex;
   height: 100vh;
   width: 100vw;
   background: #f4f4f4;
   overflow: hidden;
+
+ 
+ 
 `;
 
 const Content = styled.div`
@@ -32,6 +36,10 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 667px) {
+    padding: 1rem;
+  }
 `;
 
 const Grid = styled.div`
@@ -42,7 +50,14 @@ const Grid = styled.div`
   max-width: 1000px;
   justify-content: center;
   align-items: start;
+  
+   @media (max-width: 667px) {
+    grid-template-columns: 1fr;
+  }
 `;
+
+
+
 
 const Dashboard = () => {
   return (
